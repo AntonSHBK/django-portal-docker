@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db:
+    # build: .
+    image: postgres:14.3-alpine
+    env_file:
+      - ./portal/env/development/.db.env
+    ports:
+      - "5432:5432"
+    container_name: db
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    # networks:
+    #   - django-portal-db-net
+
+  app:
+    build: .
+    container_name: django-portal-app
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./portal/env/development/.env
+    command: python manage.py runserver 0.0.0.0:8000
+    # networks:
+      # - django-portal-app-net
+      # - django-portal-db-net
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
+# networks:
+  # django-portal-app-net:
+  #   ipam:
+  #     driver: default
+  #     config:
+  #       - subnet: 172.28.0.1/16
+  # django-portal-db-net:
+  #   driver: bridge
+
+volumes:
+  postgres_data:

@@ -1,0 +1,4 @@
+-r common.txt
+# django-debug-toolbar==4.1.0
+# pytest-django==4.5.2
+# bpython==0.24

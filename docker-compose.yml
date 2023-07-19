@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  db:
+    # build: .
+    image: postgres:14.3-alpine
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=db
+    ports:
+      - 5432:5432
+    container_name: db
+    # volumes:
+    #   - ./django_portal_db:/var/lib/postgresql/data
+
+#   # db:
+# #     image: postgres
+# #     volumes:
+# #       - postgres_data:/var/lib/postgresql/data/
+# #     environment:
+# #       - POSTGRES_USER=hello_django
+# #       - POSTGRES_PASSWORD=hello_django
+# #       - POSTGRES_DB=hello_django_dev
+
+# # volumes:
+# #   postgres_data:
+
+#   app:
+#     build: .
+#     container_name: django-portal-app
+#     ports:
+#       - 8000:8000
+#     env_file:
+#       - ./portal/env/development/.env
+#     command: python manage.py runserver 127.0.0.1:8000
+#     networks:
+#       - django-portal-app-net
+#       - django-portal-db-net
+#     volumes:
+#       - .:/app
+#     depends_on:
+#       - db
+
+# networks:
+#   django-portal-app-net:
+#     ipam:
+#       driver: default
+#       config:
+#         - subnet: 172.28.0.1/16
+#   django-portal-db-net:
+#     driver: bridge
+
+# volumes:
+#   postgres_data:
