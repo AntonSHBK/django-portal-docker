@@ -7,6 +7,8 @@ ENV PYTHONUNBUFFERED 1
 
 # ARG CUID=1000
 RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
+RUN apk add build-base linux-headers
+
 # RUN apt-get update && \
 #     apt-get install -y \
 #         gcc \
@@ -25,12 +27,13 @@ RUN pip install -r /tmp/development.txt
 RUN mkdir /app
 WORKDIR /app
 
+# copy project
+COPY . .
+
 # copy entrypoint.sh
 COPY ./entrypoint.sh .
 RUN sed -i 's/\r$//g' /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
-# copy project
-COPY . .
-
 EXPOSE 8000
+# EXPOSE 8888

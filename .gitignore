@@ -161,4 +161,4 @@ cython_debug/
 
 # Different dir:
 
-/db
+db

@@ -1,8 +1,28 @@
 version: '3.8'
 
 services:
+  app:
+    build: .
+    working_dir: /app
+    volumes:
+      - .:/app
+
+  web:
+    extends:
+      service: app
+    build: .
+    container_name: web
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./portal/env/development/.env
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
   db:
-    # build: .
     image: postgres:14.3-alpine
     env_file:
       - ./portal/env/development/.db.env
@@ -11,33 +31,25 @@ services:
     container_name: db
     volumes:
       - ./db:/var/lib/postgresql/data
-    # networks:
-    #   - django-portal-db-net
 
-  app:
-    build: .
-    container_name: django-portal-app
+
+  jupyter:
+    # build: ./jupyter
+    command: python manage.py shell_plus --notebook
+    # depends_on:
+    #   - app
+    extends:
+      service: app
     ports:
-      - "8000:8000"
+      - "8888:8888"
+    # volumes:
+    #   - .:/jupyter
     env_file:
       - ./portal/env/development/.env
-    command: python manage.py runserver 0.0.0.0:8000
-    # networks:
-      # - django-portal-app-net
-      # - django-portal-db-net
-    volumes:
-      - .:/app
-    depends_on:
-      - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=portal._debug_settings
+      - DJANGO_ALLOW_ASYNC_UNSAFE=true
 
-# networks:
-  # django-portal-app-net:
-  #   ipam:
-  #     driver: default
-  #     config:
-  #       - subnet: 172.28.0.1/16
-  # django-portal-db-net:
-  #   driver: bridge
 
-volumes:
-  postgres_data:
+# volumes:
+#   postgres_data:
