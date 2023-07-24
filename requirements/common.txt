@@ -1,5 +1,5 @@
 # Main package
-# Django==4.2.3
+Django==4.2.3
 gunicorn==21.1.0
 # Для БД
 psycopg2-binary==2.9.6

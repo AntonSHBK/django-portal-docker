@@ -162,3 +162,5 @@ cython_debug/
 # Different dir:
 
 db
+postgres_admin_data
+postgres_data

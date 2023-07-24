@@ -6,6 +6,9 @@ services:
     working_dir: /app
     volumes:
       - .:/app
+    env_file:
+      - ./portal/env/development/.env
+      
 
   web:
     extends:
@@ -14,13 +17,12 @@ services:
     container_name: web
     ports:
       - "8000:8000"
-    env_file:
-      - ./portal/env/development/.env
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
     depends_on:
       - db
+
 
   db:
     image: postgres:14.3-alpine
@@ -34,22 +36,29 @@ services:
 
 
   jupyter:
-    # build: ./jupyter
     command: python manage.py shell_plus --notebook
-    # depends_on:
-    #   - app
+    container_name: jupyter
     extends:
       service: app
     ports:
       - "8888:8888"
-    # volumes:
-    #   - .:/jupyter
     env_file:
       - ./portal/env/development/.env
-    environment:
-      - DJANGO_SETTINGS_MODULE=portal._debug_settings
-      - DJANGO_ALLOW_ASYNC_UNSAFE=true
 
 
-# volumes:
-#   postgres_data:
+  # postgres_admin:
+    # image: "dpage/pgadmin4:latest"
+    # container_name: pgadmin
+    # ports: 
+    #   - "8100:80"
+    # volumes:
+    #   - ./postgres_admin_data:/var/lib/pgadmin
+    # env_file:
+    #   - ./portal/env/development/.env
+    # depends_on:
+    #   - db
+
+
+volumes:
+  # postgres_data:
+  postgres_admin_data:
