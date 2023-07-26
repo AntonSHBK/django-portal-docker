@@ -16,8 +16,15 @@ services:
     build: .
     container_name: web
     ports:
-      - "8000:8000"
-    command: python manage.py runserver 0.0.0.0:8000
+      - "8000-8010:8000-8010"
+    command:
+      - /bin/bash
+      - -c
+      - |
+        python manage.py makemigrations
+        python manage.py migrate
+        python manage.py runserver 0.0.0.0:8000
+
     volumes:
       - .:/app
     depends_on:
@@ -42,22 +49,37 @@ services:
       service: app
     ports:
       - "8888:8888"
-    env_file:
-      - ./portal/env/development/.env
-
+    environment:
+      - DJANGO_SETTINGS_MODULE=portal.jupyter_settings
+      - DJANGO_ALLOW_ASYNC_UNSAFE=true
 
   # postgres_admin:
-    # image: "dpage/pgadmin4:latest"
-    # container_name: pgadmin
-    # ports: 
-    #   - "8100:80"
-    # volumes:
-    #   - ./postgres_admin_data:/var/lib/pgadmin
-    # env_file:
-    #   - ./portal/env/development/.env
-    # depends_on:
-    #   - db
+  #   image: "dpage/pgadmin4:latest"
+  #   container_name: pgadmin
+  #   ports: 
+  #     - "8100:80"
+  #   volumes:
+  #     - ./postgres_admin_data:/var/lib/pgadmin
+  #   env_file:
+  #     - ./portal/env/development/.env
+  #   # depends_on:
+  #   #   - db
 
+
+  mkdocs:
+    build: .
+    working_dir: /app/wiki/generic
+    container_name: mkdocs
+    ports:
+      - "8200:8200"
+    command:
+      - /bin/bash
+      - -c
+      - |
+        mkdocs build
+        mkdocs serve -a 0.0.0.0:8200
+    volumes:
+      - ./wiki/generic:/app/wiki/generic
 
 volumes:
   # postgres_data:

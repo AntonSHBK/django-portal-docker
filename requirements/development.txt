@@ -1,12 +1,18 @@
 -r common.txt
-# Отладка
+# Debug
+debugpy # ???
 django-debug-toolbar==4.1.0
-# Что то для тестирования
+
+# Testings
 pytest-django==4.5.2
 bpython==0.24
-# Документация
+
+# Documentation
 mkdocs==1.4.3
-# Расширения для jupiter
+mkdocs-awesome-pages-plugin==2.9.1
+mkdocs-material==9.1.19
+
+# For jupiter
 django-extensions==3.2.3
 ipykernel==6.24.0
 ipython==8.8.0

@@ -5,17 +5,9 @@ FROM python:3.9.6-alpine
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# ARG CUID=1000
 RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
 RUN apk add build-base linux-headers
-
-# RUN apt-get update && \
-#     apt-get install -y \
-#         gcc \
-#         libpq-dev \
-#         postgresql-dev \
-#         python3-dev \
-# RUN rm -rf /var/lib/apt/lists/* && apt-get clean
+RUN apk add --no-cache bash
 
 # install dependencies
 COPY requirements/common.txt /tmp/common.txt
@@ -35,5 +27,6 @@ COPY ./entrypoint.sh .
 RUN sed -i 's/\r$//g' /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
-EXPOSE 8000
-# EXPOSE 8888
+# EXPOSE 8000
+# EXPOSE 8010
+# EXPOSE 5432

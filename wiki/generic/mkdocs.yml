@@ -1,1 +1,38 @@
 site_name: My Docs
+
+site_dir: 'wiki/generic/build'
+
+# Navigation
+nav:
+  - home: index.md
+  - dev: dev.md
+  - settings: settings.md
+  - blog: blog/models.md
+
+# Them
+theme: 
+  name: material
+
+# Address
+dev_addr: "127.0.0.1:8200"
+
+# Extensions
+markdown_extensions:
+  - toc:
+      permalink: True
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets
+
+#  
+collapse_single_pages: True
+
+# Added plagins
+plugins: 
+  - search
+  - awesome-pages
+
+# Author
+site_author: 
+  Anton Pisarenko
