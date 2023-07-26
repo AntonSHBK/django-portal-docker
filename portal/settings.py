@@ -1,5 +1,7 @@
-from pathlib import Path
+# -*- coding: utf-8 -*-
 import os
+
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -66,8 +68,9 @@ if DEBUG:
         # 'debug_toolbar',
         'django_extensions',
     ]
-
     # MIDDLEWARE.insert(0, 'debug_toolbar.midlware.DebugToolbarMiddleware')
+    # WSGI_APPLICATION = 'portal.wsgi.application'
+
     
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -116,7 +119,32 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# https://docs.djangoproject.com/en/4.2/ref/settings/#static-url
 STATIC_URL = 'static/'
+
+# https://docs.djangoproject.com/en/4.2/ref/settings/#static-root
+STATIC_ROOT = 'static/'
+
+# https://docs.djangoproject.com/en/4.2/ref/settings/#staticfiles-dirs
+STATICFILES_DIRS = [
+    # "/home/special.polls.com/polls/static",
+    # "/home/polls.com/polls/static",
+    # "/opt/webfiles/common",
+]
+
+# https://docs.djangoproject.com/en/4.2/ref/settings/#staticfiles-finders
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+
+# Media files
+
+# https://docs.djangoproject.com/en/4.2/ref/settings/#media-root
+MEDIA_ROOT = 'media/'
+
+# https://docs.djangoproject.com/en/4.2/ref/settings/#media-url
+MEDIA_URL = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
