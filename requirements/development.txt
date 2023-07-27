@@ -1,16 +1,20 @@
 -r common.txt
 # Debug
-debugpy # ???
+debugpy==1.6.7
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
 django-debug-toolbar==4.1.0
-# django-cors-headers==4.2.0
 
 # Testings
+# https://pytest-django.readthedocs.io/en/latest/index.html
 pytest-django==4.5.2
 bpython==0.24
 
 # Documentation
+# https://www.mkdocs.org/user-guide/
 mkdocs==1.4.3
+# https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
 mkdocs-awesome-pages-plugin==2.9.1
+# https://squidfunk.github.io/mkdocs-material/getting-started/
 mkdocs-material==9.1.19
 
 # For jupiter

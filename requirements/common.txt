@@ -1,20 +1,37 @@
 # Main package
+# https://docs.djangoproject.com/en/4.2/
 Django==4.2.3
+# https://gunicorn.org/#docs
 gunicorn==21.1.0
-# Для БД
+
+# For Databese
+# https://www.psycopg.org/docs/install.html
 psycopg2-binary==2.9.6
-# Формы
+
+# Forms
+# https://django-crispy-forms.readthedocs.io/en/latest/
 django-crispy-forms==2.0
+
 # Не знаю
+# https://github.com/un1t/django-cleanup
 django-cleanup==8.0.0
-# Для работы с изображениями
+
+# For image work
+# https://pillow.readthedocs.io/en/stable/index.html
 Pillow==10.0.0
-# Не знпю
+# https://django-ckeditor.readthedocs.io/en/latest/
 django-ckeditor==6.6.1
+
 # Для многоканальной работы
+# https://channels.readthedocs.io/en/latest/
 channels==4.0.0
+
 # Для авторизации через соцсети
+# https://django-allauth.readthedocs.io/en/latest/
 django-allauth==0.54.0
-# Не знаю
+
+# For read ENV paraeters in OS
+# https://pypi.org/project/python-dotenv/
 django-dotenv==1.4.2
+# https://django-braces.readthedocs.io/en/latest/
 django-braces==1.15.0

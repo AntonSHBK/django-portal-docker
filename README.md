@@ -16,8 +16,14 @@ docker-compose -f docker-compose-dev.yml exec app python manage.py migrate --noi
 Запустить базу данных postgres и подключиться к ней используя пароль и навзание базы данных
 docker-compose -f docker-compose-dev.yml exec db psql --username=postgres --dbname=django-portal-db
 
+
+
+
 Подключиться к оболчке контейнера app:
 docker exec -it django-portal-app sh
+
+Подключиться к порталу
+http://127.0.0.1:8000
 
 Поддключиться к отладке Jupyter:
 http://127.0.0.1:8888/tree?
