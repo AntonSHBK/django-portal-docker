@@ -18,6 +18,7 @@ services:
     container_name: web
     ports:
       - "8000-8010:8000-8010"
+      - "5678:5678"
     command:
       - /bin/bash
       - -c
@@ -26,7 +27,6 @@ services:
         python manage.py makemigrations
         python manage.py migrate
         python manage.py runserver 0.0.0.0:8000
-
     volumes:
       - .:/app
     depends_on:
@@ -44,16 +44,16 @@ services:
       - ./db:/var/lib/postgresql/data
 
 
-  jupyter:
-    command: python manage.py shell_plus --notebook
-    container_name: jupyter
-    extends:
-      service: app
-    ports:
-      - "8888:8888"
-    environment:
-      - DJANGO_SETTINGS_MODULE=portal.jupyter_settings
-      - DJANGO_ALLOW_ASYNC_UNSAFE=true
+  # jupyter:
+  #   command: python manage.py shell_plus --notebook
+  #   container_name: jupyter
+  #   extends:
+  #     service: app
+  #   ports:
+  #     - "8888:8888"
+  #   environment:
+  #     - DJANGO_SETTINGS_MODULE=portal.jupyter_settings
+  #     - DJANGO_ALLOW_ASYNC_UNSAFE=true
 
   # postgres_admin:
   #   image: "dpage/pgadmin4:latest"
@@ -84,5 +84,4 @@ services:
       - ./wiki/generic:/app/wiki/generic
 
 volumes:
-  # postgres_data:
   postgres_admin_data:

@@ -1,18 +1,22 @@
 {
     "version": "0.2.0",
     "configurations": [
-        
+        // https://code.visualstudio.com/docs/python/debugging
         {
-            "name": "Python: Django",
+            "name": "Django Portal Python Debug",
             "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/manage.py",
-            "args": [
-                "runserver",
-                "127.0.0.1:8010"
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "/app"
+                }
             ],
-            "django": true,
             "justMyCode": true
-        }
+        },
     ]
 }

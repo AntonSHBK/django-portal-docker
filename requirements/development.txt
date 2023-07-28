@@ -1,5 +1,6 @@
 -r common.txt
 # Debug
+# https://github.com/microsoft/debugpy#debugpy-import-usage
 debugpy==1.6.7
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
 django-debug-toolbar==4.1.0
