@@ -37,16 +37,16 @@ d`ocker-compose -f docker-compose-dev.yml exec db psql --username=postgres --dbn
 # Отладка Python (в оболочке VS Code):
 1.  Враинт 1
 Удалённо подлючиться  к контейнеру и запутсить отладку в контейнере, однако это не практично
-2. Использовать конфигурацию для удалённого подключения python "Jango Portal Python Debug" (.vscode/launch.json)
+2. Вариант 2. 
+Использовать конфигурацию для удалённого подключения python "Jango Portal Python Debug" (.vscode/launch.json)
 Перед этим необходимо запустить контейнеры ("docker-compose-dev.debug.yml").
 Отличие в том, что в этом контейнере урезаны лишние контейнеры,  только необходимый для отладки функционал.
 
 https://code.visualstudio.com/docs/datascience/jupyter-notebooks#_connect-to-a-remote-jupyter-server
 # Отладка Jupyter (в оболочке VS Code):
-1. Запустить контейнер для отладки
+1. Запустить контейнер для отладки, дождаться выполнения миграций. Обязательно необходимо выполнить запуск в режиме отладки (Python) шаги выше и тогда появится окно с собщение о запуске сервера. 
 `docker-compose -f docker-compose-dev.debug.yml up`
-
-скопировать URL адрес сервера jupyter
+если используется токен скопировать URL адрес сервера jupyter
 пример: http://127.0.0.1:8888/?token=9795db6df98f4246a7b353d262f6acdac7b4bff00e67d57d
 перейти в требуемый испольняемый файл jupyter notebook
 выбрать ядро kernel - ("Existing Jupyter Server")
@@ -54,6 +54,7 @@ https://code.visualstudio.com/docs/datascience/jupyter-notebooks#_connect-to-a-r
 задать имя конфигурации
 зпустить выполнение
 
+# Важные ссылки
 
 Подключиться к оболчке контейнера app:
 `docker exec -it django-portal-app sh`

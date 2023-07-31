@@ -3,6 +3,7 @@ import os
 
 from pathlib import Path
 from dotenv import read_dotenv
+from django.contrib.messages import constants as messages
 
 # # Lading env parameters
 # env_path = Path('.env')
@@ -31,7 +32,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',    
     'django.contrib.postgres', # интеграция с PostgreSQL  
+    # https://docs.djangoproject.com/en/4.2/ref/contrib/sites/
     'django.contrib.sites',
+    # https://docs.djangoproject.com/en/4.2/ref/contrib/humanize/
+    'django.contrib.humanize', # tempaltes numbers and some dates
 ]
 
 RECENT_APPS = [
@@ -47,6 +51,8 @@ RECENT_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
+    # https://channels.readthedocs.io/en/latest/installation.html
+    # 'channels',
 
 ]
 INSTALLED_APPS += RECENT_APPS
@@ -97,11 +103,16 @@ if DEBUG:
     INTERNAL_IPS = os.getenv('DEBUG_HOSTS').split(',')
 
     INSTALLED_APPS += [
-        # 'debug_toolbar',
+        'debug_toolbar', # django_debug_toolbar
         'django_extensions',
     ]
-    # MIDDLEWARE.insert(0, 'debug_toolbar.midlware.DebugToolbarMiddleware')
-    # WSGI_APPLICATION = 'portal.wsgi.application'
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware'
+    ]
+    
+    DEBUG_TOOLBAR_CONFIG = {
+        'SHOW_TOOLBAR_CALLBACK': lambda _request: DEBUG
+    }
 
     
 # Database
@@ -232,3 +243,26 @@ CKEDITOR_CONFIGS = {
     },
 }
 # End django-ckeditor
+
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+
+# End Email
+
+# Google Secret Key
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LdqzjEUAAAAAKTDYsfuwZce-oa214GC8QeChVBF'
+
+# Message
+MESSAGE_TAGS = {
+    messages.INFO: 'alert-secondary',
+    messages.DEBUG: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'aletr-warning',
+    messages.ERROR: 'alert-danger',
+}
+# End message

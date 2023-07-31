@@ -35,3 +35,6 @@ django-allauth==0.54.0
 django-dotenv==1.4.2
 # https://django-braces.readthedocs.io/en/latest/
 django-braces==1.15.0
+
+# 
+# 
