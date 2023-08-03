@@ -46,18 +46,14 @@ services:
       - ./db:/var/lib/postgresql/data
 
   
-  jupyter:    
-    command: python manage.py shell_plus --notebook
-    container_name: jupyter
-    extends:
-      service: app
-    ports:
-      - "8888:8888"
-    environment:
-      - DJANGO_SETTINGS_MODULE=portal.jupyter_settings
-      - DJANGO_ALLOW_ASYNC_UNSAFE=true
-    depends_on:
-      - web
-
-volumes:
-  postgres_admin_data:
+  # jupyter:    
+  #   command: python manage.py shell_plus --notebook
+  #   container_name: jupyter
+  #   extends:
+  #     service: app
+  #   ports:
+  #     - "8888:8888"
+  #   env_file:
+  #     - ./portal/env/development/.env
+  #   depends_on:
+  #     - web

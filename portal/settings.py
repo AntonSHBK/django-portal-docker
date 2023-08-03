@@ -238,8 +238,19 @@ SOCIALACCOUNT_PROVIDERS = {
 
 # Sart django-ckeditor
 CKEDITOR_CONFIGS = {
-    'awesome_ckeditor': {
-        'toolbar': 'Basic',
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source']
+        ]
+    },
+    'admin_post': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 800,
     },
 }
 # End django-ckeditor
@@ -266,3 +277,8 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 # End message
+
+
+# Taggit
+# TAGGIT_CASE_INSENSITIVE = True
+# End taggit

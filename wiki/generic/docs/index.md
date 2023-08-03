@@ -28,6 +28,8 @@ The portal was written to develop my experience and skills
 Монтирование контейнеров и запуск:
 `docker-compose -f docker-compose-dev.yml up`
 
+Если при запуске возникли ошибки, возможно это связано с первым запуском а так же нарушена очередность запуска, я не смог реализовать запуск одного контейнера после готовности к работе другого. Решением может быть запуск только контейнера app, web и bd, после успешного запуска уже пробовать запускать остальные.
+
 Выполнить миграцию внутри контейнера
 `docker-compose -f docker-compose-dev.yml exec app python manage.py migrate --noinput`
 
@@ -45,7 +47,11 @@ d`ocker-compose -f docker-compose-dev.yml exec db psql --username=postgres --dbn
 https://code.visualstudio.com/docs/datascience/jupyter-notebooks#_connect-to-a-remote-jupyter-server
 # Отладка Jupyter (в оболочке VS Code):
 1. Запустить контейнер для отладки, дождаться выполнения миграций. Обязательно необходимо выполнить запуск в режиме отладки (Python) шаги выше и тогда появится окно с собщение о запуске сервера. 
+
+`docker-compose -f docker-compose-dev.debug.yml build`
+
 `docker-compose -f docker-compose-dev.debug.yml up`
+
 если используется токен скопировать URL адрес сервера jupyter
 пример: http://127.0.0.1:8888/?token=9795db6df98f4246a7b353d262f6acdac7b4bff00e67d57d
 перейти в требуемый испольняемый файл jupyter notebook
@@ -67,4 +73,8 @@ http://127.0.0.1:8888/tree?
 
 Подключиться к документации MkDocs:
 http://localhost:8200/
+
+Создать супераользователя
+python manage.py createsuperuser
+
 
