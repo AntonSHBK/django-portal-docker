@@ -77,4 +77,5 @@ http://localhost:8200/
 Создать супераользователя
 python manage.py createsuperuser
 
-
+Посмотреть логи контейнера для отлова ошибок
+docker-compose -f docker-compose.prod.yml logs -f
