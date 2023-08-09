@@ -1,0 +1,6 @@
+-r common.txt
+
+# Python WSGI HTTP Server for UNIX
+# https://docs.gunicorn.org/en/stable/install.html
+gunicorn==21.2.0
+

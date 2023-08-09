@@ -1,3 +1,11 @@
+# My folders
+other
+django_project/db_dev
+django_project/db_prod
+django_project/static
+django_project/postgres_admin_data
+django_project/media
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -122,9 +130,9 @@ celerybeat.pid
 # Environments
 .env
 .venv
-env/
+# env/
 venv/
-ENV/
+# ENV/
 env.bak/
 venv.bak/
 
@@ -158,9 +166,3 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
-
-# Different dir:
-
-db
-postgres_admin_data
-postgres_data

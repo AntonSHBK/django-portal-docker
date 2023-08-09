@@ -1,3 +1,7 @@
+###############
+# DEVELOPMENT #
+###############
+
 # pull official base image
 FROM python:3.9.6-alpine
 
@@ -13,7 +17,7 @@ RUN apk add --no-cache bash
 COPY requirements/common.txt /tmp/common.txt
 COPY requirements/development.txt /tmp/development.txt
 RUN pip install --upgrade pip
-RUN pip install -r /tmp/development.txt
+RUN pip install --no-cache-dir -r /tmp/development.txt
 
 # set work directory
 RUN mkdir /app
@@ -26,7 +30,3 @@ COPY . .
 COPY ./entrypoint.sh .
 RUN sed -i 's/\r$//g' /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
-
-# EXPOSE 8000
-# EXPOSE 8010
-# EXPOSE 5432

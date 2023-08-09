@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: app
+    build: .
+    working_dir: /app
+    volumes:
+      - .:/app
+    env_file:
+      - ./env/development/.env
+      
+      
+  web:
+    extends:
+      service: app
+    working_dir: /app/django_project
+    build: .
+    container_name: web
+    ports:
+      - "8000:8000"
+      - "5678:5678"
+    command:
+      - sh
+      - -c
+      - |
+        sleep 5s
+        python manage.py collectstatic --noinput
+        python manage.py makemigrations
+        python manage.py migrate
+        python -m debugpy --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000
+      # Wait callback server django
+      # python -m debugpy --listen 0.0.0.0:5678 --wait-for-client manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
+
+  db:
+    image: postgres:14.3-alpine
+    env_file:
+      - ./env/development/.db.env
+    ports:
+      - "5432:5432"
+    container_name: db
+    volumes:
+      - ./django_project/db_dev:/var/lib/postgresql/data
+
+  
+  jupyter:    
+    working_dir: /app/django_project
+    command:
+      - sh
+      - -c
+      - |
+        sleep 30s
+        python manage.py shell_plus --notebook
+    container_name: jupyter
+    extends:
+      service: app
+    ports:
+      - "8888:8888"
+    env_file:
+      - ./env/development/.env
+    depends_on:
+      - web
