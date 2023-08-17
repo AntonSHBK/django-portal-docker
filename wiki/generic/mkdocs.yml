@@ -4,10 +4,10 @@ site_dir: 'wiki/generic/build'
 
 # Navigation
 nav:
-  - home: index.md
-  - dev: dev.md
-  - settings: settings.md
-  - blog: blog/models.md
+  - Home: index.md
+  - Settings: settings/settings.md
+  - Blog: blog/models.md
+  - Templates: templates/templates.md
 
 # Them
 theme: 

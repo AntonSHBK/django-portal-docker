@@ -79,3 +79,6 @@ python manage.py createsuperuser
 
 Посмотреть логи контейнера для отлова ошибок
 docker-compose -f docker-compose.prod.yml logs -f
+
+Для запуска в проде
+http://127.0.0.1:8000/

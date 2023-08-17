@@ -18,7 +18,6 @@ SECRET_KEY = os.environ.get("DJANGO_DEVELOPMENT_SECRET_KEY", "admin")
 DEBUG = int(os.environ.get("DEBUG", default=False))
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
-# For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
 ALLOWED_HOSTS = os.environ.get("DEVELOPMENT_ALLOWED_HOSTS").split(",")
 
 
@@ -170,6 +169,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # https://docs.djangoproject.com/en/4.2/ref/settings/#staticfiles-dirs
 STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'other_static/')
     # "/home/special.polls.com/polls/static",
     # "/home/polls.com/polls/static",
     # "/opt/webfiles/common",
