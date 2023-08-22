@@ -70,20 +70,20 @@ services:
   #   #   - db
 
 
-  mkdocs:
-    build: .
-    working_dir: /app/wiki/generic
-    container_name: mkdocs
-    ports:
-      - "8200:8200"
-    command:
-      - /bin/bash
-      - -c
-      - |
-        mkdocs build
-        mkdocs serve -a 0.0.0.0:8200
-    volumes:
-      - ./wiki/generic:/app/wiki/generic
+  # mkdocs:
+  #   build: .
+  #   working_dir: /app/wiki/generic
+  #   container_name: mkdocs
+  #   ports:
+  #     - "8200:8200"
+  #   command:
+  #     - /bin/bash
+  #     - -c
+  #     - |
+  #       mkdocs build
+  #       mkdocs serve -a 0.0.0.0:8200
+  #   volumes:
+  #     - ./wiki/generic:/app/wiki/generic
 
 volumes:
   postgres_admin_data:

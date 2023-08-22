@@ -82,3 +82,10 @@ docker-compose -f docker-compose.prod.yml logs -f
 
 Для запуска в проде
 http://127.0.0.1:8000/
+
+Создать суперпользователя
+`python manage.py createsuperuser`
+
+`python manage.py collectstatic --noinput`
+`python manage.py makemigrations`
+`python manage.py migrate`

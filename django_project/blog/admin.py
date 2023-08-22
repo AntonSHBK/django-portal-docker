@@ -6,4 +6,5 @@ from .models import Post
 @admin.register(Post)
 class PageAdmin(admin.ModelAdmin):
     list_display = ['title', 'author']
-    prepopulated_fields = {"slug": ('title',)}
+    prepopulated_fields = {"slug": ['title',]}
+    

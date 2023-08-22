@@ -17,7 +17,7 @@ class UserPostListView(ListView):
     # Сама модель
     model = Post
     # Название шаблона
-    # template_name = ''
+    template_name = 'blog/user_posts/html'
     # Контекст переменная хранения данных
     context_object_name = 'blog_post_user_list'
     
