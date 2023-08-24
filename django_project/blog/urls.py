@@ -6,6 +6,6 @@ from django.conf import settings
 from blog.views import UserPostListView
 
 urlpatterns = [
-    path('blog/user<str:username>/', UserPostListView.as_view, name='user-post-list')
+    path('blog/user/<str:username>/', UserPostListView.as_view(), name='user-post-list')
 ]
 

@@ -17,10 +17,9 @@ class UserPostListView(ListView):
     # Сама модель
     model = Post
     # Название шаблона
-    template_name = 'blog/user_posts/html'
+    template_name = 'blog/user_posts.html'
     # Контекст переменная хранения данных
-    context_object_name = 'blog_post_user_list'
-    
+    context_object_name = 'blog_post_user_list'    
     
     def get_queryset(self) -> QuerySet[Any]:
         user: User = get_object_or_404(User, username=self.kwargs.get('username'))

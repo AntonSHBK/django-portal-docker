@@ -1,1 +1,33 @@
 {% extends 'blog/base.html' %}
+
+{% block Post %}
+  
+{% endblock Post %}
+
+
+{% block content %}
+    <body>
+        <div class="container py-4 py-xl-5">
+            <div class="row mb-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2>Artificial Intelligence</h2>
+                    <p class="w-lg-50">Abstract txet</p>
+                </div>
+            </div>
+            {% for post in blog_post_user_list %}
+            <div class="mx-5 my-3">
+                <div class="px-5">
+                    <h4>{{post.title}}</h4>
+                    <p> {{post.content|safe}}</p>
+                    <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
+                        <div>
+                            <p class="fw-bold mb-0">{{post.author}}</p>
+                            <p class="text-muted mb-0">{{post.date_created|date:"d.m.o"}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}            
+        </div>
+    </body>
+{% endblock content %}
