@@ -4,11 +4,17 @@
 
 <!doctype html>
 <html lang="en">
-  {% load static %}
-  {% include 'common/header.html' %}
-  {% include 'common/navbar.html' %}
-  {% block content %}
-    {% include 'common/defoulte_content.html' %}
-  {% endblock content %}
-  {% include 'common/footer.html' %}  
+  <body>
+    {% include 'common/header.html' %}
+
+    {% block blockname navbar %}
+      {% include 'common/navbar.html' %}
+    {% endblock blockname navbar %}
+    
+    {% block content %}
+      {% include 'common/defoulte_content.html' %}
+    {% endblock content %}
+
+    {% include 'common/footer.html' %}  
+  </body>
 </html>

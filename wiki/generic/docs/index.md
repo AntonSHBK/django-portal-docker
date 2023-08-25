@@ -89,3 +89,7 @@ http://127.0.0.1:8000/
 `python manage.py collectstatic --noinput`
 `python manage.py makemigrations`
 `python manage.py migrate`
+
+Графичексий интерфнйййс написан в boostrap studio
+Статические файлы скачаны с сайта и помещены по адресу:
+`other_static/`

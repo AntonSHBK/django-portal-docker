@@ -169,10 +169,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # https://docs.djangoproject.com/en/4.2/ref/settings/#staticfiles-dirs
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'other_static/')
-    # "/home/special.polls.com/polls/static",
-    # "/home/polls.com/polls/static",
-    # "/opt/webfiles/common",
+    os.path.join(BASE_DIR, 'other_static/'),
+    # os.path.join(BASE_DIR, 'templates/src/')
 ]
 
 # https://docs.djangoproject.com/en/4.2/ref/settings/#staticfiles-finders
