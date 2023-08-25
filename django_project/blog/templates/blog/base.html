@@ -1,1 +1,9 @@
 {% extends 'common/base.html' %}
+
+{% block title %}
+    {% if blog_post_user_list|length == 1  %}
+        {{blog_post_user_list.title}}
+    {% elif blog_post_user_list|length > 1 %}
+        All posts of {{ blog_post_user_list.author }}
+    {% endif%}
+{% endblock title %}
