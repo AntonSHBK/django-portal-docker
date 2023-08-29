@@ -1,0 +1,7 @@
+# Documentation
+# https://www.mkdocs.org/user-guide/
+mkdocs==1.4.3
+# https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
+mkdocs-awesome-pages-plugin==2.9.1
+# https://squidfunk.github.io/mkdocs-material/getting-started/
+mkdocs-material==9.1.19

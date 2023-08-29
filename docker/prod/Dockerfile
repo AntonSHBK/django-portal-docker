@@ -1,0 +1,58 @@
+###########
+# BUILDER #
+###########
+
+# pull official base image
+FROM python:3.9.6-alpine as builder
+
+# set work directory
+WORKDIR /usr/src/app
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# install psycopg2 dependencies
+RUN apk update
+RUN apk add -y --no-cache\
+    postgresql-dev\
+    gcc\
+    python3-dev\
+    musl-dev
+
+# install dependencies
+RUN pip install --upgrade pip
+COPY pip_install_txt/common.txt /tmp/common.txt
+COPY pip_install_txt/production.txt /tmp/production.txt
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r /tmp/production.txt
+
+#########
+# FINAL #
+#########
+
+# pull official base image
+FROM python:3.9.6-alpine
+
+# create the appropriate directories
+ENV APP_HOME=/app/backend
+RUN mkdir -p $APP_HOME
+WORKDIR $APP_HOME
+
+# create the app user
+ARG CUID=1000
+RUN addgroup -S app && adduser -S app -G app
+
+# install dependencies
+RUN apk update && apk add libpq
+COPY --from=builder /usr/src/app/wheels /wheels
+COPY --from=builder /tmp/production.txt .
+RUN pip install --no-cache /wheels/*
+
+# copy project
+COPY ./backend $APP_HOME
+
+# chown all the files to the app user
+RUN chown -R app:app $APP_HOME
+
+# change to the app user
+USER app

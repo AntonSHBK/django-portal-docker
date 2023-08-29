@@ -1,11 +1,11 @@
 # My folders
 other
-django_project/db_dev
-django_project/db_prod
-django_project/static
-django_project/other_static
-django_project/postgres_admin_data
-django_project/media
+backend/db_dev
+backend/db_prod
+backend/static
+backend/other_static
+backend/postgres_admin_data
+backend/media
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

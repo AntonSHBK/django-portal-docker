@@ -10,14 +10,6 @@ django-debug-toolbar==4.1.0
 pytest-django==4.5.2
 bpython==0.24
 
-# Documentation
-# https://www.mkdocs.org/user-guide/
-mkdocs==1.4.3
-# https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
-mkdocs-awesome-pages-plugin==2.9.1
-# https://squidfunk.github.io/mkdocs-material/getting-started/
-mkdocs-material==9.1.19
-
 # For jupiter
 django-extensions==3.2.3
 ipykernel==6.24.0
