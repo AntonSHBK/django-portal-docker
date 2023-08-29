@@ -3,7 +3,7 @@ other
 django_project/db_dev
 django_project/db_prod
 django_project/static
-# django_project/other_static
+django_project/other_static
 django_project/postgres_admin_data
 django_project/media
 

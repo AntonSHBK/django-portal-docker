@@ -25,7 +25,7 @@ class Post(models.Model):
         return self.title     
     
     def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'pk': self.pk})
+        return reverse(viewname='blog:user-post-list', kwargs={'username': self.author})
     
     def total_lkes(self):        
         return self.likes.count()

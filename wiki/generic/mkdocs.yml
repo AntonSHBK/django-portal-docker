@@ -5,9 +5,11 @@ site_dir: 'wiki/generic/build'
 # Navigation
 nav:
   - Home: index.md
-  - Settings: settings/settings.md
-  - Blog: blog/models.md
-  - Templates: templates/templates.md
+  - Settings: settings.md
+  - Sitemap: sitemap.md
+  - robots.txt: robots.md
+  - Blog: models.md
+  - Templates: templates.md
 
 # Them
 theme: 

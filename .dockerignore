@@ -21,5 +21,11 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
+
+# My files and folders
 LICENSE
 README.md
+requirements
+other
+nginx
+.vevn

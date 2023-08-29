@@ -87,3 +87,6 @@ services:
 
 volumes:
   postgres_admin_data:
+
+# Networks
+# https://docs.docker.com/compose/compose-file/06-networks/

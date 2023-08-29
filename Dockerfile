@@ -14,8 +14,8 @@ RUN apk add build-base linux-headers
 RUN apk add --no-cache bash
 
 # install dependencies
-COPY requirements/common.txt /tmp/common.txt
-COPY requirements/development.txt /tmp/development.txt
+COPY pip_install_txt/common.txt /tmp/common.txt
+COPY pip_install_txt/development.txt /tmp/development.txt
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r /tmp/development.txt
 
