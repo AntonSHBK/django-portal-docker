@@ -8,27 +8,48 @@
 - Nginx
 - Docker Compose
 - Boostrap
+
+# Что нужно изучить
+- Продалжить смотреть уроки Бовсуновского
+- Изучить основы тестирования в pytests или тесты встроеннные в Django
+- Изучить и разобраться что такое "валидатор" в Django
+- Функционирование React и работа с ним
+- Стили и работа в Boostrap
+- Не забывать про ROS
+
 ## Разработка: 
 
 Разработка: включает контейнер с функционирующим сервером Django и сервером быза данных PostgesQL.
 
-`docker-compose -f docker-compose-dev.yml build`
+```bash
+docker-compose -f docker-compose-dev.yml build
+```
 
-`docker-compose -f docker-compose-dev.yml up`
+```bash
+docker-compose -f docker-compose-dev.yml up
+```
 
 ## Разработка с отладкой в ручном режими или с испольщованием VS Code:
 Разработка с отладкой в ручном режими или с испольщованием VS Code: включает контейер с севером Django, базой данных PosgresQL, сервером Jupyter.
 
-`docker-compose -f docker-compose-dev-debug.yml build`
+```bash
+docker-compose -f docker-compose-dev-debug.yml build
+```
 
-`docker-compose -f docker-compose-dev-debug.yml up`
+```bash
+docker-compose -f docker-compose-dev-debug.yml up
+```
 
 ## Продакшн:
 Производство: включает контейнер сервер Gunicorn, базой данных PosgresQL и сервер для обратного проксирвоания Nginx.
 
-`docker-compose -f docker-compose-prod.yml build`
+```bash
+docker-compose -f docker-compose-prod.yml build
+```
 
-`docker-compose -f docker-compose-prod-debug.yml up`
+```bash
+docker-compose -f docker-compose-prod-debug.yml up
+```
 
 ## Пояснение:
 Я постарался что бы в процессе сборки не возникало проблем однако это не исключено, проблемы могут возникнуть если на одной машине будут смонитрованы разные версии контейнеров (prod, dev). Также проблемы могут быть из-за не синхронного запуска контейнеров, я предусмотерл ожидение контейнеров предд запуском, вы может изменит этот параметр (sleep 5s).
@@ -40,7 +61,9 @@
 
 
 Подключиться к оболчке контейнера app:
-`docker exec -it django-portal-app sh`
+```bash
+docker exec -it django-portal-app sh
+```
 
 Подключиться к порталу
 http://127.0.0.1:8000

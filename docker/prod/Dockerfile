@@ -39,7 +39,7 @@ RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
 # create the app user
-ARG CUID=1000
+# ARG CUID=1000
 RUN addgroup -S app && adduser -S app -G app
 
 # install dependencies

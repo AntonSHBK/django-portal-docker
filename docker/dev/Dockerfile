@@ -17,7 +17,8 @@ RUN apk add -y --no-cache\
     musl-dev\
     build-base\
     linux-headers\
-    bash
+    bash\
+    zsh
 
 # install dependencies
 COPY pip_install_txt/common.txt /tmp/common.txt

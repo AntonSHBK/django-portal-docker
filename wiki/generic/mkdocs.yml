@@ -5,11 +5,15 @@ site_dir: 'wiki/generic/build'
 # Navigation
 nav:
   - Home: index.md
+  - Build and run: build_and_run.md
   - Settings: settings.md
   - Sitemap: sitemap.md
   - robots.txt: robots.md
   - Blog: models.md
   - Templates: templates.md
+  - Testing: testing.md
+  - Error pages: error_pages.models.md
+  - Docker: docker.md
 
 # Them
 theme: 

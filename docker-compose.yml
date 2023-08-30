@@ -43,7 +43,7 @@ services:
   #     context: .
   #     dockerfile: ./docker/MkDocs/Dockerfile
   #   working_dir: /app/wiki/generic
-  #   container_name: mkdocs
+  #   container_name: mkdocs-local
   #   ports:
   #     - "8200:8200"
   #   command:
