@@ -9,7 +9,9 @@ from blog.views import UserPostListView
 app_name = "blog"
 
 urlpatterns = [
-    path('blog/user/<str:username>/', UserPostListView.as_view(), name='user-post-list'),   
-    
+    # Show all posts user
+    path('blog/user/<str:username>/', UserPostListView.as_view(), name='user-post-list'),
+    # Create new post 
+    path('blog/user/new/', UserPostListView.as_view(), name='new_post'),   
 ]
 

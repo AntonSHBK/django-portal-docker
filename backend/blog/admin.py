@@ -7,4 +7,5 @@ from .models import Post
 class PageAdmin(admin.ModelAdmin):
     list_display = ['title', 'author']
     prepopulated_fields = {"slug": ['title',]}
+
     
