@@ -46,7 +46,7 @@ RECENT_APPS = [
     'crispy_forms',
     # https://django-ckeditor.readthedocs.io/en/latest/
     'ckeditor',
-    # https://django-allauth.readthedocs.io/en/latest/installation.html
+    # https://django-allauth.readthedocs.io/en/latest/
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -76,7 +76,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Allauth
+    # "allauth.account.middleware.AccountMiddleware",
 ]
+
 
 
 ROOT_URLCONF = 'portal.urls'
@@ -202,7 +205,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Start django-crispy-forms
 # https://django-crispy-forms.readthedocs.io/en/latest/install.html#installing-django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'uni_form'
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # End django-crispy-forms
+
+
+# Redirect after login
+LOGIN_REDIRECT_URL =  '/'
 
 # django-allauth
 # https://django-allauth.readthedocs.io/en/latest/installation.html

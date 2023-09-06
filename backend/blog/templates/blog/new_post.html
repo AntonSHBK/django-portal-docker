@@ -1,0 +1,8 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% if user.is_authenticated %}
+
+    {% else %}
+        <a class="nav-link active" href="{% url 'account_login' %}">You need authorisation</a>
+    {% endif %}
+{% endblock content %}

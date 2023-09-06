@@ -19,8 +19,6 @@ NOTEBOOK_ARGUMENTS = [
     "8888",
     "--allow-root",
     "--no-browser",
-    # "--NotebookApp.iopub_data_rate_limit=1e5",
-    # "--NotebookApp.token=''",
 ]
 
 DJANGO_ALLOW_ASYNC_UNSAFE = True

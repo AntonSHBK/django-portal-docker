@@ -9,6 +9,8 @@ from django.shortcuts import (
 from django.contrib.auth.models import User
 from django.db.models.query import QuerySet
 from django.views.generic.list import ListView
+from django.views.generic import TemplateView
+
 
 from blog.models import Post
 
@@ -45,7 +47,20 @@ class UserPostListView(ListView):
     #     user: User = get_object_or_404(User, username=self.kwargs.get('username'))
     #     return Post.objects.filter(author=user).order_by('-date_created') 
 
-class NewPostView():
+
+class NewArticleView(TemplateView):
+    template_name = 'blog/new_post.html'
     
+
+class AllAuthorsListView(ListView):
+    # Сама модель
+    model = User
+    # Название шаблона
+    template_name = 'blog/all_authors.html'
+    # Контекст переменная хранения данных
     
-    pass
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        queryset = User.objects.all()
+        context["all_authors"] = queryset
+        return context

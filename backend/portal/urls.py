@@ -16,9 +16,11 @@ from .errors.views import page_internal_server_error_500
 # Main urls
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('blog.urls')),    
-    # path('accounts/', include('allauth.urls')),
+    path('blog/', include('blog.urls')),
+    path('customer/', include('customer.urls')),
+    path('accounts/', include('allauth.urls')),
     # path("debug/", include("debug_toolbar.urls")),
+    path('', include('main_page.urls')),
 ]
 
 # Erros pages
