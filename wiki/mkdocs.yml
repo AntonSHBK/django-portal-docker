@@ -1,6 +1,6 @@
 site_name: My Docs
 
-site_dir: 'wiki/generic/build'
+site_dir: 'build'
 
 # Navigation
 nav:

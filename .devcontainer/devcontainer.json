@@ -1,5 +1,5 @@
 {
-	"name": "Django-Poortal",
+	"name": "Django-Portal",
 	// "dockerComposeFile": "./docker-compose.yml",
 	// "workspaceFolder": "./",
 	// "service": "dev",
@@ -9,3 +9,25 @@
 	// 		"bash": {"path": "/bin/bash"},},
 	// },	
 }
+
+// {
+// 	"name": "Django-Portal",
+// 	"build": {
+// 	  "dockerfile": "../Dockerfile",
+// 	},
+// 	// Set *default* container specific settings.json values on container create.
+// 	"settings": {
+// 	  "python.pythonPath": "/usr/local/bin/python",
+// 	  "python.languageServer": "Pylance",
+// 	  "python.linting.enabled": true,
+// 	  "python.formatting.blackPath": "/usr/local/bin/black",
+// 	  "python.formatting.provider": "black",
+// 	  "editor.formatOnSave": true,
+// 	},
+// 	// Add the IDs of extensions you want installed when the container is created.
+// 	"extensions": [
+// 	  "ms-python.python",
+// 	  "ms-python.vscode-pylance"
+// 	],
+// 	"postCreateCommand": "pip install -r requirements-dev.txt"
+//   }

@@ -12,14 +12,18 @@ services:
     ports:
       - "8000:8000"
       - "5678:5678"
+    # command:
+    #   - sh
+    #   - -c
+    #   - |
+    #     python manage.py collectstatic --noinput
+    #     python manage.py makemigrations
+    #     python manage.py migrate
+    #     python -m debugpy --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000
     command:
       - sh
       - -c
       - |
-        sleep 5s
-        python manage.py collectstatic --noinput
-        python manage.py makemigrations
-        python manage.py migrate
         python -m debugpy --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000
     volumes:
       - ./backend:/app/backend
@@ -38,11 +42,51 @@ services:
       - ./backend/db_dev:/var/lib/postgresql/data
 
 
+  redis:
+    container_name: redis
+    build:
+      context: .
+      dockerfile: ./redis/Dockerfile
+    working_dir: /app/ 
+    env_file:
+      - ./env/development/.env
+
+
+  # celery:
+  #   restart: always
+  #   build:
+  #     context: .
+  #     dockerfile: ./redis/Dockerfile
+  #   command: celery -A app worker -l info
+  #   # volumes:
+  #   #   - .:/app
+  #   env_file:
+  #     - ./env/development/.env
+  #   depends_on:
+  #     - db
+  #     # - redis
+  #     - app
+
+
+  # celery-beat:
+  #   restart: always
+  #   build:
+  #     context: .
+  #     dockerfile: ./redis/Dockerfile
+  #   command: celery -A proj beat -l info
+  #   # volumes:
+  #   #   - .:/app
+  #   depends_on:
+  #     - db
+  #     # - redis
+  #     - app
+
+
   # mkdocs:
   #   build:
   #     context: .
   #     dockerfile: ./docker/MkDocs/Dockerfile
-  #   working_dir: /app/wiki/generic
+  #   working_dir: /app/wiki/
   #   container_name: mkdocs-local
   #   ports:
   #     - "8200:8200"
@@ -53,7 +97,7 @@ services:
   #       mkdocs build
   #       mkdocs serve -a 0.0.0.0:8200
   #   volumes:
-  #     - ./wiki/generic:/app/wiki/generic
+  #     - ./wiki/:/app/wiki/
 
   # jupyter:    
   #   working_dir: /app/backend

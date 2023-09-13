@@ -3,7 +3,7 @@
     "configurations": [
         // https://code.visualstudio.com/docs/python/debugging
         {
-            "name": "Django Portal Python Debug",
+            "name": "Django Portal Debugpy",
             "type": "python",
             "request": "attach",
             "connect": {
@@ -16,6 +16,19 @@
                     "remoteRoot": "/app"
                 }
             ],
+            "justMyCode": true
+        },
+        // https://code.visualstudio.com/docs/python/tutorial-django
+        {
+            "name": "Djnago Portal Container Debug",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\manage.py",
+            "args": [
+                "runserver",
+                "0.0.0.0:8000"
+            ],
+            "django": true,
             "justMyCode": true
         },
     ]

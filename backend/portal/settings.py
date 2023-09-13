@@ -2,13 +2,16 @@
 import os
 
 from pathlib import Path
-from dotenv import read_dotenv
 from django.contrib.messages import constants as messages
 
-# # Lading env parameters
-# env_path = Path('.env')
-# read_dotenv(dotenv=env_path)
-# # End loading env
+# ********** Import configs: **********
+# redis settings
+from portal.config.redis import *
+
+# logging settings
+from portal.config.logging import *
+
+ 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,7 +56,11 @@ RECENT_APPS = [
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
     # https://channels.readthedocs.io/en/latest/installation.html
-    # 'channels',
+    # 'channels',    
+    # https://django-celery-beat.readthedocs.io/en/latest/
+    'django_celery_beat',
+    # https://django-celery-results.readthedocs.io/en/latest/
+    'django_celery_results',
 
 ]
 INSTALLED_APPS += RECENT_APPS
@@ -109,7 +116,7 @@ WSGI_APPLICATION = 'portal.wsgi.application'
 
 
 if DEBUG:    
-    INTERNAL_IPS = os.getenv('DEBUG_HOSTS').split(',')
+    INTERNAL_IPS = os.getenv('DEBUG_HOSTS').split(",")
 
     INSTALLED_APPS += [
         'debug_toolbar', # django_debug_toolbar
@@ -190,7 +197,6 @@ STATICFILES_FINDERS = [
 ]
 
 # Media files
-
 # https://docs.djangoproject.com/en/4.2/ref/settings/#media-root
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
