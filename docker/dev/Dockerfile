@@ -31,5 +31,10 @@ ENV APP_HOME=/app/backend
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
+# add supervisor conf
+RUN mkdir -p /var/log/app/
+RUN mkdir -p /etc/supervisor
+COPY config/supervisord.conf /etc/supervisor/supervisord.conf
+
 # copy project
 COPY ./backend $APP_HOME

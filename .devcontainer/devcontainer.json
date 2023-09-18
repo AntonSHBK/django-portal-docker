@@ -1,33 +1,27 @@
 {
 	"name": "Django-Portal",
-	// "dockerComposeFile": "./docker-compose.yml",
-	// "workspaceFolder": "./",
-	// "service": "dev",
-	// "settings": {
-	// 	"terminal.integrated.defaultProfile.linux": "bash", 
-	// 	"terminal.integrated.profiles.linux": {
-	// 		"bash": {"path": "/bin/bash"},},
-	// },	
-}
+	"dockerComposeFile": "./docker-compose.yml",
+	"workspaceFolder": "/app",
+	"service": "dev",
+	"settings": {
+		// Terminal
+		"terminal.integrated.defaultProfile.linux": "bash", 
+		"terminal.integrated.profiles.linux": {
+			"bash": {"path": "/bin/bash"},
+		},
+		// Python
+		"python.pythonPath": "/usr/local/bin/python3",
+		"python.languageServer": "Pylance",
+		// "python.autoComplete.extraPaths": [
+			
+		// ],
+		// "python.analysis.extraPaths": [
 
-// {
-// 	"name": "Django-Portal",
-// 	"build": {
-// 	  "dockerfile": "../Dockerfile",
-// 	},
-// 	// Set *default* container specific settings.json values on container create.
-// 	"settings": {
-// 	  "python.pythonPath": "/usr/local/bin/python",
-// 	  "python.languageServer": "Pylance",
-// 	  "python.linting.enabled": true,
-// 	  "python.formatting.blackPath": "/usr/local/bin/black",
-// 	  "python.formatting.provider": "black",
-// 	  "editor.formatOnSave": true,
-// 	},
-// 	// Add the IDs of extensions you want installed when the container is created.
-// 	"extensions": [
-// 	  "ms-python.python",
-// 	  "ms-python.vscode-pylance"
-// 	],
-// 	"postCreateCommand": "pip install -r requirements-dev.txt"
-//   }
+		// ],
+		// Other
+	},
+	"extensions": [
+			  "ms-python.python",
+			  "ms-python.vscode-pylance"
+			],
+}

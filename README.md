@@ -20,8 +20,6 @@
 - Разобраться с логированием (хотя бы со станддартым)
 
 # Сделать сейчас:
-- сделать навбар
-- стили главной страницы
 - форму авторизации
 - форму новой статьи 
 
@@ -166,3 +164,7 @@ urlpatterns += [
 [Документация](https://docs.djangoproject.com/en/4.2/ref/contrib/sitemaps/)
 
 [Видео](https://www.youtube.com/watch?v=Y0qKYFZDlmo&t=379s)
+
+# Suprvisor
+
+[Документация](http://supervisord.org/running.html)

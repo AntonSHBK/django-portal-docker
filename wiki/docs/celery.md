@@ -1,7 +1,17 @@
-import os
-from django.conf import settings
-from celery import Celery
+# Celery
 
+[Документация](https://docs.celeryq.dev/en/stable/index.html)
+
+[Туториал](https://django.fun/ru/articles/tutorials/obrabotka-periodicheskih-zadach-v-django-s-pomoshyu-celery-i-docker/)
+
+
+Планировщик задач использую в связке с [supervisor](supervisor.md) и брокером Redis.
+
+Celery — это распределенная очередь задач, которая может собирать, записывать, планировать и выполнять задачи вне вашей основной программы.
+
+Настройки celery находят в `portal/celery.py`, настрйоки параметров Redis `portal/config/redis.py`.
+
+```python
 # Сначала мы устанавливаем значение по умолчанию для переменной окружения DJANGO_SETTINGS_MODULE, чтобы Celery знал, как найти проект Django.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portal.settings')
 # Затем мы создали новый экземпляр Celery с именем core и присвоили значение переменной с именем app.
@@ -14,24 +24,19 @@ app.autodiscover_tasks()
 app.conf.update(
     BROKER_URL=getattr(settings, 'BROKER_URL', 'redis://redis:6379'),
     CELERY_RESULT_BACKEND=getattr(settings, 'CELERY_RESULT_BACKEND', 'redis://redis:6379'),
-    # CELERY_DEFAULT_QUEUE=settings.CELERY_DEFAULT_QUEUE,
-    # CELERY_TASK_SERIALIZER='json',
-    # CELERY_ACCEPT_CONTENT=['json'],  # Ignore other content
-    # CELERY_RESULT_SERIALIZER='json',
-    # CELERY_BEAT_SCHEDULER='django_celery_beat.schedulers:DatabaseScheduler',
     CELERY_TIMEZONE='Europe/Moscow',
-    # CELERY_SEND_EVENTS=True,
-    # CELERY_ENABLE_UTC=True,
-    # CELERY_IGNORE_RESULT=False
 )
+```
+Параметры Redis подгружаются непосредственно в `setting.py`.
 
+Добавил так же в `portal/__init__.py`
+```python
+from .celery import app as celery_app
 
-# Tasks
-from celery import shared_task
-from celery.utils.log import get_task_logger
+__all__ = ("celery_app",)
+```
 
-logger = get_task_logger(__name__)
-
-@shared_task
-def sample_task():
-    logger.info("The sample task just ran.")
+Что бы `Celery`заработал как требуется (с использованием `django-celery-beat`) необходимо заупстить:
+```
+celery -A portal beat -l info --scheduler
+```

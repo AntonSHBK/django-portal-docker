@@ -1,28 +1,30 @@
 version: '3.8'
 
-services:     
+services:
   app:
-    container_name: app
+    container_name: app-dev
     build:
       context: ../
       dockerfile: ./docker/dev/Dockerfile
     working_dir: /app/backend 
     env_file:
-      - ./env/development/.env
+      - ../env/development/.env
     ports:
       - "8000:8000"
       - "5678:5678"
     command:
       - sh
       - -c
+      # - |
+      #   sleep 5s
+      #   python manage.py collectstatic --noinput
+      #   python manage.py makemigrations
+      #   python manage.py migrate
+      #   python -m debugpy --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000
       - |
-        sleep 5s
-        python manage.py collectstatic --noinput
-        python manage.py makemigrations
-        python manage.py migrate
         python -m debugpy --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./backend:/app/backend
+      - ../backend:/app/backend
     depends_on:
       - db
 
@@ -30,29 +32,32 @@ services:
   db:
     image: postgres:14.3-alpine
     env_file:
-      - ./env/development/.db.env
+      - ../env/development/.db.env
     ports:
       - "5432:5432"
     container_name: db
     volumes:
-      - ./backend/db_dev:/var/lib/postgresql/data
+      - ../backend/db_dev:/var/lib/postgresql/data
 
   
-  jupyter:    
+  jupyter:
+    build:
+      context: ../
+      dockerfile: ./docker/dev/Dockerfile
     working_dir: /app/backend
     command:
       - sh
       - -c
       - |
-        sleep 30s
+        sleep 10s
         python manage.py shell_plus --notebook
-    container_name: jupyter
-    extends:
-      service: app
+    container_name: jupyter-dev
+    volumes:
+      - ../backend/jupyter:/app/backend/jupyter
     ports:
       - "8888:8888"
     env_file:
-      - ./env/development/.env
+      - ../env/development/.env
     depends_on:
-      - web
+      - app
 

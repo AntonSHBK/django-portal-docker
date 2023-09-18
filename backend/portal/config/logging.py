@@ -66,13 +66,13 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'debug.log',
+            'filename': os.path.join(LOG_DIR, 'debug.log'),
             'formatter': 'verbose',
         },
         'error_file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': 'error.log',
+            'filename': os.path.join(LOG_DIR, 'error.log'),
             'formatter': 'verbose',
         },
     },

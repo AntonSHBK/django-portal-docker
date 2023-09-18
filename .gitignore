@@ -6,6 +6,8 @@ backend/static
 backend/other_static
 backend/postgres_admin_data
 backend/media
+backend/logs
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
