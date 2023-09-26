@@ -1,7 +1,7 @@
-from .settings import *
+from django.conf import settings
 
-if "django_extensions" not in INSTALLED_APPS:    
-    INSTALLED_APPS.append("django_extensions")
+if "django_extensions" not in settings.INSTALLED_APPS:    
+    settings.INSTALLED_APPS.append("django_extensions")
 
 SHELL_PLUS = "ipython"
 SHELL_PLUS_PRINT_SQL = True

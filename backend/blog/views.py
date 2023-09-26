@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
 
-
 from django.shortcuts import (
     get_object_or_404,
     render,
     redirect,
 )
+from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-from django.db.models.query import QuerySet
-from django.views.generic.list import ListView
+# from django.db.models.query import QuerySet
 from django.views.generic import TemplateView
+from django.views.generic.list import ListView
+from django.views.generic.edit import FormView
 
-
+# Models
 from blog.models import Post
 
+# Forms
+from blog.forms import NewPosr
 class UserPostMixin():
     # выборка мользователя: всё то что написано ниже т.е.
     # user: User = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -48,8 +51,13 @@ class UserPostListView(ListView):
     #     return Post.objects.filter(author=user).order_by('-date_created') 
 
 
-class NewArticleView(TemplateView):
+class NewArticleView(FormView):
+    # Шаблон
     template_name = 'blog/new_post.html'
+    # Форма
+    form_class = NewPosr
+    # Redirect url
+    success_url =  reverse_lazy('blog:all-authors')
     
 
 class AllAuthorsListView(ListView):

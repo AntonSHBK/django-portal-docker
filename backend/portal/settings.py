@@ -6,10 +6,13 @@ from django.contrib.messages import constants as messages
 
 # ********** Import configs: **********
 # redis settings
-from portal.config.redis import *
+from .config.redis import *
 
 # logging settings
-from portal.config.logging import *
+from .config.logging import *
+
+# jupyter settings
+# from .jupyter_settings import *
 
  
 
@@ -47,6 +50,7 @@ RECENT_APPS = [
     'django_cleanup.apps.CleanupConfig',
     # https://django-crispy-forms.readthedocs.io/en/latest/
     'crispy_forms',
+    'crispy_bootstrap4',
     # https://django-ckeditor.readthedocs.io/en/latest/
     'ckeditor',
     # https://django-allauth.readthedocs.io/en/latest/
@@ -210,8 +214,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Start django-crispy-forms
 # https://django-crispy-forms.readthedocs.io/en/latest/install.html#installing-django-crispy-forms
-CRISPY_TEMPLATE_PACK = 'uni_form'
-# CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# CRISPY_TEMPLATE_PACK = 'uni_form'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # End django-crispy-forms
 
 

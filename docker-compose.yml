@@ -53,7 +53,7 @@ services:
 
 
   supevisor:
-    restart: always
+    # restart: always
     build:
       context: .
       dockerfile: ./docker/dev/Dockerfile
@@ -112,3 +112,18 @@ services:
   #     - ./env/development/.env
   #   depends_on:
   #     - web
+  
+  ## PgAdmin
+  ## https://stackoverflow.com/questions/57109494/unable-to-connect-to-server-pgadmin-4
+  # pg_admin:
+  #   image: dpage/pgadmin4:7
+  #   environment:
+  #       PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+  #       PGADMIN_DEFAULT_PASSWORD: masterkey
+  #       PGADMIN_LISTEN_PORT: 80
+  #   ports:
+  #       - 15432:80
+  #   volumes:
+  #       - ./backend/pgadmin:/var/lib/pgadmin
+  #   depends_on:
+  #       - db

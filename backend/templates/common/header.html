@@ -1,17 +1,22 @@
 <head>
     {% load static %}
+    <!-- Meta tegs -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta name="description" property="og:description" content="description">
     <meta name="keywords" content="seo, python, django, web development">
     <meta name="author" content="Anton, Pisarenko">
 
-    
+    <!-- Title site -->
     <title>{% block title %}Django Portal{% endblock title %}</title>
     
+    <!-- CSS Styles -->
     <link href="{% static 'boostrap5/css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href='{% static "base/css/Articles-Cards-images.css"%}'>
     <link rel="stylesheet" href={% static "base/css/Footer-Dark-icons.css"%}>
     <link rel="stylesheet" href={% static "base/css/styles.css"%}>
+
+    <!-- favicon.ico -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
 
 </head>
