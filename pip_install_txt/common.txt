@@ -9,6 +9,7 @@ psycopg2-binary==2.9.6
 # Forms
 # https://django-crispy-forms.readthedocs.io/en/latest/
 django-crispy-forms==2.0
+crispy-bootstrap4==2022.1
 
 # For tags
 # https://django-taggit.readthedocs.io/en/latest/getting_started.html
@@ -55,3 +56,5 @@ redis==5.0.0
 
 # http://supervisord.org/installing.html
 supervisor==4.2.5
+
+

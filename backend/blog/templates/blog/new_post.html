@@ -4,11 +4,14 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <form method="post">
-            {% csrf_token %}
-            <table>{{ form|crispy }}</table>
-            <input type="submit" value="Add article">
-        </form>
+        <div class="container text-center mt-5" >
+            <form method="post">
+                {% csrf_token %}
+                {{ form.media }}
+                <table>{{ form|crispy }}</table>
+                <input type="submit" value="Add article">
+            </form>
+        </div>        
     {% else %}
         <a class="nav-link active" href="{% url 'account_login' %}">You need authorisation</a>
     {% endif %}

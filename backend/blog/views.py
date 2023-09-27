@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.http import HttpResponse
 from django.shortcuts import (
     get_object_or_404,
     render,
@@ -10,13 +11,13 @@ from django.contrib.auth.models import User
 # from django.db.models.query import QuerySet
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, CreateView
 
 # Models
 from blog.models import Post
 
 # Forms
-from blog.forms import NewPosr
+from blog.forms import NewPost
 class UserPostMixin():
     # выборка мользователя: всё то что написано ниже т.е.
     # user: User = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -55,9 +56,25 @@ class NewArticleView(FormView):
     # Шаблон
     template_name = 'blog/new_post.html'
     # Форма
-    form_class = NewPosr
+    form_class = NewPost
     # Redirect url
     success_url =  reverse_lazy('blog:all-authors')
+    
+    def form_valid(self, form) -> HttpResponse:
+        
+        return super().form_valid(form)
+    
+
+
+# class NewArticleView(CreateView):
+#     model = NewPost
+#     fields = ['title',  'contennt']
+#     template_name = 'blog/new_post.html'
+#     success_url =  reverse_lazy('blog:all-authors')
+    
+#     def form_valid(self, form) -> HttpResponse:
+        
+#         return super().form_valid(form)
     
 
 class AllAuthorsListView(ListView):
@@ -72,3 +89,5 @@ class AllAuthorsListView(ListView):
         queryset = User.objects.all()
         context["all_authors"] = queryset
         return context
+    
+    

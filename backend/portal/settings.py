@@ -73,6 +73,7 @@ LOCAL_APPS = [
     'blog.apps.BlogConfig',
     'main_page.apps.MainPageConfig',
     'customer.apps.CustomerConfig',
+    'discus.apps.DiscusConfig',
 ]
 INSTALLED_APPS += LOCAL_APPS
 
