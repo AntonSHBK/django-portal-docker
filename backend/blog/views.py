@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from typing import Any
 from django.http import HttpResponse
 from django.shortcuts import (
     get_object_or_404,
@@ -17,7 +18,8 @@ from django.views.generic.edit import FormView, CreateView
 from blog.models import Post
 
 # Forms
-from blog.forms import NewPost
+from blog.forms import NewPost, NewPost_2
+
 class UserPostMixin():
     # выборка мользователя: всё то что написано ниже т.е.
     # user: User = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -44,14 +46,10 @@ class UserPostListView(ListView):
         queryset = Post.objects.filter(author=user)
         context["blog_post_user_list"] = queryset.order_by('date_created')
         return context
-    
-    # context_object_name = 'blog_post_user_list'    
-    
-    # def get_queryset(self) -> QuerySet[Any]:
-    #     user: User = get_object_or_404(User, username=self.kwargs.get('username'))
-    #     return Post.objects.filter(author=user).order_by('-date_created') 
 
 
+# About "FormView" exemple
+# https://www.agiliq.com/blog/2019/01/django-formview/
 class NewArticleView(FormView):
     # Шаблон
     template_name = 'blog/new_post.html'
@@ -60,23 +58,42 @@ class NewArticleView(FormView):
     # Redirect url
     success_url =  reverse_lazy('blog:all-authors')
     
-    def form_valid(self, form) -> HttpResponse:
-        
+    def form_valid(self, form:NewPost) -> HttpResponse:
+        valid_date = form.cleaned_data
+        save = None
         return super().form_valid(form)
     
-
-
-# class NewArticleView(CreateView):
-#     model = NewPost
-#     fields = ['title',  'contennt']
-#     template_name = 'blog/new_post.html'
-#     success_url =  reverse_lazy('blog:all-authors')
     
-#     def form_valid(self, form) -> HttpResponse:
-        
-#         return super().form_valid(form)
+# About "CreateView" exemple
+# https://www.agiliq.com/blog/2019/01/django-createview/
+class NewArticleView(CreateView):
+    # model = NewPost
+    # fields = ['title',  'contennt']
+
+    # Шаблон
+    template_name = 'blog/new_post.html'
+    # Форма
+    form_class = NewPost_2
+    # Redirect url
+    success_url =  reverse_lazy('blog:all-authors')
+    
+    # def form_valid(self, form) -> HttpResponse:
+    #     form.instance.author = self.request.user
+    #     return super().form_valid(form)
+    
+    # def get_initial(self, *args, **kwargs):
+    #     initial = super(BookCreateView, self).get_initial(**kwargs)
+    #     initial['title'] = 'My Title'
+    #     return initial
+    
+    # def get_form_kwargs(self, *args, **kwargs):
+    #     kwargs = super(BookCreateView, self).get_form_kwargs(*args, **kwargs)
+    #     kwargs['user'] = self.request.user
+    #     return kwargs
     
 
+# About "ListView" exemple
+# https://www.agiliq.com/blog/2017/12/when-and-how-use-django-listview/
 class AllAuthorsListView(ListView):
     # Сама модель
     model = User

@@ -21,12 +21,7 @@ from .errors.views import page_internal_server_error_500
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
-    re_path(
-        r"^favicon\.ico$",
-        RedirectView.as_view(
-            url=staticfiles_storage.url("favicon.ico")),
-        name='favicon',
-    ),
+    path('discus/', include('dicus.urls')),
     path('customer/', include('customer.urls')),
     path('accounts/', include('allauth.urls')),
     # path("debug/", include("debug_toolbar.urls")),
@@ -44,6 +39,7 @@ if settings.DEBUG:
     
     
 # For SEO
+# https://django.fun/ru/docs/django/4.2/ref/contrib/sitemaps/
 sitemaps = {
     'exhibist': PortalSitemap
 }
@@ -58,4 +54,11 @@ urlpatterns += [
     re_path(r'^sitemap\.xml$',
             sitemap, {'sitemaps': sitemaps},
             name='django.contrib.sitemaps.views.sitemap'),
+    # https://simpleit.rocks/python/django/django-favicon-adding/
+    re_path(
+        r"^favicon\.ico$",
+        RedirectView.as_view(
+            url=staticfiles_storage.url("favicon.ico")),
+        name='favicon',
+    ),
 ]

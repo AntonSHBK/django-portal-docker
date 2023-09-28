@@ -3,6 +3,8 @@ from ckeditor.widgets import CKEditorWidget
 
 from django import forms
 
+from blog.models import Post
+
 class NewPost(forms.Form):
     title = forms.CharField(
         max_length=200, 
@@ -15,4 +17,11 @@ class NewPost(forms.Form):
     )
     
     
-    pass
+class NewPost_2(forms.ModelForm):
+    
+    class Meta:
+        model = Post
+        fields = ('title', 'content')
+        # exclude = ()
+        verbose_name = 'New post'
+        verbose_name_plural = 'New posts'
