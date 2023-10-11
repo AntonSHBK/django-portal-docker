@@ -21,7 +21,7 @@ from .errors.views import page_internal_server_error_500
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
-    path('discus/', include('dicus.urls')),
+    # path('discus/', include('discus.urls')),
     path('customer/', include('customer.urls')),
     path('accounts/', include('allauth.urls')),
     # path("debug/", include("debug_toolbar.urls")),

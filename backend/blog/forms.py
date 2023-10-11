@@ -5,7 +5,8 @@ from django import forms
 
 from blog.models import Post
 
-class NewPost(forms.Form):
+
+class NewPostForm(forms.Form):
     title = forms.CharField(
         max_length=200, 
         label="Title article",
@@ -13,11 +14,11 @@ class NewPost(forms.Form):
     content = forms.CharField(
         max_length=5000,
         label="Text article",
-        widget=CKEditorWidget()
+        widget=CKEditorWidget(),
     )
     
     
-class NewPost_2(forms.ModelForm):
+class NewPostModelForm(forms.ModelForm):
     
     class Meta:
         model = Post
@@ -25,3 +26,4 @@ class NewPost_2(forms.ModelForm):
         # exclude = ()
         verbose_name = 'New post'
         verbose_name_plural = 'New posts'
+    

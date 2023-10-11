@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from typing import Any
 from django.http import HttpResponse
 from django.shortcuts import (
     get_object_or_404,
@@ -8,6 +7,7 @@ from django.shortcuts import (
     redirect,
 )
 from django.urls import reverse_lazy
+from django.contrib import messages
 from django.contrib.auth.models import User
 # from django.db.models.query import QuerySet
 from django.views.generic import TemplateView
@@ -18,7 +18,7 @@ from django.views.generic.edit import FormView, CreateView
 from blog.models import Post
 
 # Forms
-from blog.forms import NewPost, NewPost_2
+from blog.forms import NewPostForm,  NewPostModelForm
 
 class UserPostMixin():
     # выборка мользователя: всё то что написано ниже т.е.
@@ -54,11 +54,11 @@ class NewArticleView(FormView):
     # Шаблон
     template_name = 'blog/new_post.html'
     # Форма
-    form_class = NewPost
+    form_class = NewPostForm
     # Redirect url
     success_url =  reverse_lazy('blog:all-authors')
     
-    def form_valid(self, form:NewPost) -> HttpResponse:
+    def form_valid(self, form:NewPostForm) -> HttpResponse:
         valid_date = form.cleaned_data
         save = None
         return super().form_valid(form)
@@ -73,13 +73,14 @@ class NewArticleView(CreateView):
     # Шаблон
     template_name = 'blog/new_post.html'
     # Форма
-    form_class = NewPost_2
+    form_class = NewPostModelForm
     # Redirect url
     success_url =  reverse_lazy('blog:all-authors')
     
-    # def form_valid(self, form) -> HttpResponse:
-    #     form.instance.author = self.request.user
-    #     return super().form_valid(form)
+    def form_valid(self, form) -> HttpResponse:
+        form.instance.author = self.request.user
+        messages.success(self.request, "The task was created successfully.")
+        return super(NewArticleView, self).form_valid(form)
     
     # def get_initial(self, *args, **kwargs):
     #     initial = super(BookCreateView, self).get_initial(**kwargs)
