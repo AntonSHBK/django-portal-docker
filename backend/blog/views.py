@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import (
     get_object_or_404,
@@ -12,7 +13,12 @@ from django.contrib.auth.models import User
 # from django.db.models.query import QuerySet
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
-from django.views.generic.edit import FormView, CreateView
+from django.views.generic.edit import (
+    FormView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+    )
 
 # Models
 from blog.models import Post
@@ -50,7 +56,7 @@ class UserPostListView(ListView):
 
 # About "FormView" exemple
 # https://www.agiliq.com/blog/2019/01/django-formview/
-class NewArticleView(FormView):
+class NewArticleFormView(FormView):
     # Шаблон
     template_name = 'blog/new_post.html'
     # Форма
@@ -60,14 +66,17 @@ class NewArticleView(FormView):
     
     def form_valid(self, form:NewPostForm) -> HttpResponse:
         valid_date = form.cleaned_data
-        save = None
+        valid_date['author'] = self.request.user
+        save = Post.objects.create(**form.cleaned_data)
         return super().form_valid(form)
     
+    def form_invalid(self, form: BaseModelForm) -> HttpResponse:
+        return super().form_invalid(form)
     
 # About "CreateView" exemple
 # https://www.agiliq.com/blog/2019/01/django-createview/
-class NewArticleView(CreateView):
-    # model = NewPost
+class NewArticleCreateView(CreateView):
+    # model = NewPostModelForm
     # fields = ['title',  'contennt']
 
     # Шаблон
@@ -75,12 +84,7 @@ class NewArticleView(CreateView):
     # Форма
     form_class = NewPostModelForm
     # Redirect url
-    success_url =  reverse_lazy('blog:all-authors')
-    
-    def form_valid(self, form) -> HttpResponse:
-        form.instance.author = self.request.user
-        messages.success(self.request, "The task was created successfully.")
-        return super(NewArticleView, self).form_valid(form)
+    success_url =  reverse_lazy('blog:all-authors')    
     
     # def get_initial(self, *args, **kwargs):
     #     initial = super(BookCreateView, self).get_initial(**kwargs)
@@ -92,6 +96,36 @@ class NewArticleView(CreateView):
     #     kwargs['user'] = self.request.user
     #     return kwargs
     
+    def form_valid(self, form) -> HttpResponse:
+        form.instance.author = self.request.user
+        messages.success(self.request, "The task was created successfully.")
+        
+        # Мы используем ModelForm, а его метод save() возвращает инстанс
+        # модели, связанный с формой. Аргумент commit=False говорит о том, что
+        # записывать модель в базу рановато.
+        # instance = form.save(commit=False)
+
+        # Теперь, когда у нас есть несохранённая модель, можно ей чего-нибудь
+        # накрутить. Например, заполнить внешний ключ на auth.User. У нас же
+        # блог, а не анонимный имижборд, правда?
+        # instance.user = self.request.user
+
+        # А теперь можно сохранить в базу
+        # instance.save()
+        
+        return super(NewArticleCreateView, self).form_valid(form)
+    
+    def form_invalid(self, form: BaseModelForm) -> HttpResponse:
+        return super().form_invalid(form)
+        
+
+class EditArticleUpdateView(UpdateView):
+    
+    pass
+
+class DelleteArticleDeleteView(DeleteView):
+    
+    pass
 
 # About "ListView" exemple
 # https://www.agiliq.com/blog/2017/12/when-and-how-use-django-listview/
