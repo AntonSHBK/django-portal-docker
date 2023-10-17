@@ -10,7 +10,11 @@
             {% for post in blog_post_user_list %}
             <div class="mx-5 my-3">
                 <div class="px-5">
-                    <h4>{{post.title}}</h4>
+                    <h4>
+                        <a href="{% url 'blog:one-post' post.author.username post.id %}">{{post.title}}
+
+                        </a>
+                    </h4>
                     <p> {{post.content|safe}}</p>
                     <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
                         <div>

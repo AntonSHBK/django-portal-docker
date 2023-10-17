@@ -27,8 +27,13 @@ services:
         python manage.py makemigrations
         python manage.py migrate
         python -m debugpy --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000
+    # command:
+    #   - sh
+    #   - -c
+    #   - |
+    #     sleep 5d
     volumes:
-      - ./backend:/app/backend
+      - ./:/app/
     depends_on:
       - db
 

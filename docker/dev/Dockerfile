@@ -27,7 +27,7 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r /tmp/development.txt
 
 # set work directory
-ENV APP_HOME=/app/backend
+ENV APP_HOME=/app/
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
@@ -37,4 +37,7 @@ RUN mkdir -p /etc/supervisor
 COPY config/supervisord.conf /etc/supervisor/supervisord.conf
 
 # copy project
-COPY ./backend $APP_HOME
+COPY ./ $APP_HOME
+
+# Разобраться (скрипт заупскатеся после сборки)
+# ENTRYPOINT ["/run-model-service.sh"]

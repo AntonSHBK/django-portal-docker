@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container text-center mt-5" >
+            <<!-- item_confirm_delete.html -->
+            <form action="" method="post">
+                {% csrf_token %}
+                <button>Удалить</button>
+            </form>            
+        </div>        
+    {% else %}
+        <a class="nav-link active" href="{% url 'account_login' %}">You need authorisation</a>
+    {% endif %}
+{% endblock content %}

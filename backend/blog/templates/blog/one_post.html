@@ -1,11 +1,25 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-    {% if all_authors %}
-        <ul>     
-            {% for author in all_authors %}            
-                <li>
-                    <a href="{% url  'blog:user-post-list' author.username %}">{{ author.username }}</a>
-            {% endfor %}
-        </ul>
-    {% endif %}
+<div>
+    <div class="mx-5 my-3">
+        <div class="px-5">
+            <h4>{{object.title}}</h4>
+            <p> {{object.content|safe}}</p>
+            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
+                <div>
+                    <p class="fw-bold mb-0">{{post.author}}</p>
+                    <p class="text-muted mb-0">{{post.date_created|date:"d.m.o"}}</p>
+                </div>
+            </div>
+        </div>
+        {% if object %}
+        <form action="{% url 'blog:edit-post' object.pk %}">
+            <button class="btn btn-light bg-white me-3" style="margin-right: 6px;">Редактировать</button>
+        </form>
+        <form action="{% url 'blog:delete-post' object.pk %}">
+            <button class="btn btn-light bg-white me-3" style="margin-right: 6px;">Удалить</button>
+        </form>
+        {% endif %}  
+    </div>      
+</div>
 {% endblock content %}
