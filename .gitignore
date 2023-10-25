@@ -1,5 +1,5 @@
 # My folders
-other
+other/**
 backend/db_dev
 backend/db_prod
 backend/static
@@ -8,7 +8,7 @@ backend/postgres_admin_data
 backend/media
 backend/logs
 backend/pgadmin
-
+backend/date-time-filters/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

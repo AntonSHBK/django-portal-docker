@@ -2,6 +2,8 @@
 import os
 
 from pathlib import Path
+# from django.utils.translation import gettext_lazy as _
+# from django.utils.translation import gettext
 from django.contrib.messages import constants as messages
 
 # ********** Import configs: **********
@@ -177,7 +179,23 @@ TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
+
+
+# LANGUAGE_CODE = 'ru'
+
+
+# LANGUAGES = (
+#     ('ru', gettext('ru')),
+# )
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -210,7 +228,6 @@ MEDIA_URL = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Start django-crispy-forms
@@ -306,3 +323,19 @@ MESSAGE_TAGS = {
 # Taggit
 # TAGGIT_CASE_INSENSITIVE = True
 # End taggit
+
+# Contance
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+
+# CONSTANCE_REDIS_CONNECTION = {
+#     'host': 'localhost',
+#     'port': 6379,
+#     'db': 0,
+# }
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': '127.0.0.1:11211',
+#     }
+# }
+# CONSTANCE_DATABASE_CACHE_BACKEND = 'default'

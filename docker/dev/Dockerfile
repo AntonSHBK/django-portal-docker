@@ -10,14 +10,17 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 RUN apk update
-RUN apk add -y --no-cache\
-    postgresql-dev\
-    gcc\
-    python3-dev\
-    musl-dev\
-    build-base\
-    linux-headers\
-    bash\
+RUN apk add -y --no-cache \
+    postgresql-dev \
+    gcc \
+    python3-dev \
+    musl-dev \
+    build-base \
+    linux-headers \
+    gettext \
+    nano \
+    vim \
+    bash \
     zsh
 
 # install dependencies
