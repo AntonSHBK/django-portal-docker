@@ -16,6 +16,8 @@ nav:
   - Docker: docker.md
   - Celery: celery.md
   - Supervisor: supervisor.md
+  - Transkate: tranclate.md
+  - Modul "Constance": constance.md
 
 # Them
 theme: 

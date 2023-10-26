@@ -19,7 +19,7 @@ app.conf.update(
     # CELERY_ACCEPT_CONTENT=['json'],  # Ignore other content
     # CELERY_RESULT_SERIALIZER='json',
     # CELERY_BEAT_SCHEDULER='django_celery_beat.schedulers:DatabaseScheduler',
-    CELERY_TIMEZONE='Europe/Moscow',
+    CELERY_TIMEZONE=getattr(settings, 'TIME_ZONE', 'Europe/Moscow'),
     # CELERY_SEND_EVENTS=True,
     # CELERY_ENABLE_UTC=True,
     # CELERY_IGNORE_RESULT=False

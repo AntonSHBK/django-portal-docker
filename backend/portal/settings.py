@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',    
-    'django.contrib.postgres', # интеграция с PostgreSQL  
+    'django.contrib.staticfiles',
+    # интеграция с PostgreSQL  
+    'django.contrib.postgres',  
     # https://docs.djangoproject.com/en/4.2/ref/contrib/sites/
     'django.contrib.sites',
     # https://docs.djangoproject.com/en/4.2/ref/contrib/sitemaps/
@@ -85,6 +86,7 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'django..middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -93,8 +95,6 @@ MIDDLEWARE = [
     # Allauth
     # "allauth.account.middleware.AccountMiddleware",
 ]
-
-
 
 ROOT_URLCONF = 'portal.urls'
 
@@ -173,7 +173,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Moscow'
 
@@ -189,7 +189,6 @@ LOCALE_PATHS = (
 
 
 
-# LANGUAGE_CODE = 'ru'
 
 
 # LANGUAGES = (
@@ -325,17 +324,5 @@ MESSAGE_TAGS = {
 # End taggit
 
 # Contance
-CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
-
-# CONSTANCE_REDIS_CONNECTION = {
-#     'host': 'localhost',
-#     'port': 6379,
-#     'db': 0,
-# }
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#         'LOCATION': '127.0.0.1:11211',
-#     }
-# }
-# CONSTANCE_DATABASE_CACHE_BACKEND = 'default'
+from .config.constance import *
+# Contance end
