@@ -1,12 +1,13 @@
 # My folders
 other/**
-backend/db_dev
 backend/db_prod
 backend/static
 backend/other_static
 backend/postgres_admin_data
 backend/media
-backend/logs
+**logs
+db
+**db_dev
 backend/pgadmin
 backend/date-time-filters/
 

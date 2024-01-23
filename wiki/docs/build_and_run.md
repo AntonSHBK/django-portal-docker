@@ -15,11 +15,11 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 Выполнить миграцию внутри контейнера
 `docker-compose -f docker-compose-dev.yml exec app python manage.py migrate --noinput`
 
-Запустить базу данных postgres и подключиться к ней используя пароль и навзание базы данных
+Запустить базу данных postgres и подключиться к ней используя пароль и название базы данных
 d`ocker-compose -f docker-compose-dev.yml exec db psql --username=postgres --dbname=django-portal-db`
 
 # Отладка Python (в оболочке VS Code):
-1.  Враинт 1
+1.  Вариант 1
 Удалённо подлючиться  к контейнеру и запутсить отладку в контейнере, однако это не практично
 2. Вариант 2. 
 Использовать конфигурацию для удалённого подключения python "Jango Portal Python Debug" (.vscode/launch.json)
@@ -28,7 +28,7 @@ d`ocker-compose -f docker-compose-dev.yml exec db psql --username=postgres --dbn
 
 https://code.visualstudio.com/docs/datascience/jupyter-notebooks#_connect-to-a-remote-jupyter-server
 # Отладка Jupyter (в оболочке VS Code):
-1. Запустить контейнер для отладки, дождаться выполнения миграций. Обязательно необходимо выполнить запуск в режиме отладки (Python) шаги выше и тогда появится окно с собщение о запуске сервера. 
+1. Запустить контейнер для отладки, дождаться выполнения миграций. Обязательно необходимо выполнить запуск в режиме отладки (Python) шаги выше и тогда появится окно с сообщение о запуске сервера. 
 
 `docker-compose -f docker-compose-dev.debug.yml build`
 
@@ -36,11 +36,11 @@ https://code.visualstudio.com/docs/datascience/jupyter-notebooks#_connect-to-a-r
 
 если используется токен скопировать URL адрес сервера jupyter
 пример: http://127.0.0.1:8888/?token=9795db6df98f4246a7b353d262f6acdac7b4bff00e67d57d
-перейти в требуемый испольняемый файл jupyter notebook
+перейти в требуемый исполняемый файл jupyter notebook
 выбрать ядро kernel - ("Existing Jupyter Server")
-указать скопированный адресс ранее
+указать скопированный адрес ранее
 задать имя конфигурации
-зпустить выполнение
+запустить выполнение
 
 # Важные ссылки
 
@@ -50,13 +50,13 @@ https://code.visualstudio.com/docs/datascience/jupyter-notebooks#_connect-to-a-r
 Подключиться к порталу
 http://127.0.0.1:8000
 
-Поддключиться к отладке Jupyter:
+Подключиться к отладке Jupyter:
 http://127.0.0.1:8888/tree?
 
 Подключиться к документации MkDocs:
 http://localhost:8200/
 
-Создать супераользователя
+Создать суперпользователя
 python manage.py createsuperuser
 
 Посмотреть логи контейнера для отлова ошибок

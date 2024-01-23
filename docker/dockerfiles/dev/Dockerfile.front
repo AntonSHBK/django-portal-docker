@@ -1,0 +1,18 @@
+###############
+# DEVELOPMENT #
+###############
+FROM node:20-alpine
+
+# create the appropriate directories
+ENV APP_HOME=/app/frontend
+RUN mkdir -p $APP_HOME
+WORKDIR $APP_HOME
+
+# 
+COPY frontend/package*.json ./
+RUN yarn install
+
+# copy project
+# COPY frontend $APP_HOME
+
+

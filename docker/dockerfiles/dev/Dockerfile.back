@@ -24,13 +24,13 @@ RUN apk add -y --no-cache \
     zsh
 
 # install dependencies
-COPY pip_install_txt/common.txt /tmp/common.txt
-COPY pip_install_txt/development.txt /tmp/development.txt
+COPY ./pip_install_txt/common.txt /tmp/common.txt
+COPY ./pip_install_txt/development.txt /tmp/development.txt
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r /tmp/development.txt
 
-# set work directory
-ENV APP_HOME=/app/
+# create the appropriate directories
+ENV APP_HOME=/app/backend
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
@@ -40,7 +40,7 @@ RUN mkdir -p /etc/supervisor
 COPY config/supervisord.conf /etc/supervisor/supervisord.conf
 
 # copy project
-COPY ./ $APP_HOME
+COPY backend $APP_HOME
 
 # Разобраться (скрипт заупскатеся после сборки)
 # ENTRYPOINT ["/run-model-service.sh"]

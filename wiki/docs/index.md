@@ -18,7 +18,7 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
 # Проект django_portal
 
-Графичексий интерфнйййс написан в boostrap studio
+Графический интерфейс написан в boostrap studio
 Статические файлы скачаны с сайта и помещены по адресу:
 `django_project/other_static/`
 

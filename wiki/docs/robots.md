@@ -9,7 +9,7 @@ User-agent: *
 Disallow: /admin/
 Disallow: /accounts/
 ```
-Более подробно можно онакомиться в [документации](https://django.fun/ru/articles/tutorials/kak-dobavit-robotstxt-na-svoj-sajt-django/)
+Более подробно можно ознакомиться в [документации](https://django.fun/ru/articles/tutorials/kak-dobavit-robotstxt-na-svoj-sajt-django/)
 
 Добавить urls:
 

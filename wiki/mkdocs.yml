@@ -9,7 +9,6 @@ nav:
   - Settings: settings.md
   - Sitemap: sitemap.md
   - robots.txt: robots.md
-  - Blog: models.md
   - Templates: templates.md
   - Testing: testing.md
   - Error pages: error_pages.models.md

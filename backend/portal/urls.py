@@ -22,7 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
     # path('discus/', include('discus.urls')),
-    path('customer/', include('customer.urls')),
     path('accounts/', include('allauth.urls')),
     # path("debug/", include("debug_toolbar.urls")),
     path('', include('main_page.urls')),

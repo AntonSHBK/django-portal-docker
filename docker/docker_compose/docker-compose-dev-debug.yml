@@ -4,12 +4,11 @@ services:
   app:
     container_name: app-dev
     build:
-      context: ../
-      dockerfile: ./docker/dev/Dockerfile
+      context: ../../
+      dockerfile: ./docker/dockerfiles/dev/Dockerfile.back
     working_dir: /app/backend 
     env_file:
-      - ../env/development/.env
-    ports:
+      - ./docker/env/development/.env    ports:
       - "8000:8000"
       - "5678:5678"
     command:

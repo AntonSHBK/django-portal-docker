@@ -1,0 +1,130 @@
+version: '3.8'
+
+volumes:
+  db_prod:
+  static:
+  media:
+  nginx:
+services:
+  web:
+    # container_name: app-portal
+    build:
+      context: ../../
+      dockerfile: ./docker/dockerfiles/prod/Dockerfile
+    working_dir: /app/backend
+    env_file:
+      - ./docker/env/production/.env
+    volumes:
+      - static:/app/django_project/static
+      - media:/app/django_project/media
+    command: 
+      - sh
+      - -c
+      - |
+        sleep 5s
+        python manage.py collectstatic --noinput
+        python manage.py makemigrations
+        python manage.py migrate
+        gunicorn portal.wsgi:application --bind 0.0.0.0:8000      
+    expose:
+      - 8000
+    depends_on:
+      - db  
+    networks:
+      - main_prod
+
+
+  db:
+    # container_name: db-portal
+    image: postgres:14.3-alpine
+    build:
+      context: ../../
+    volumes:
+      - db_prod:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./docker/env/production/.db.env
+    networks:
+      - main_prod
+
+
+  nodejs:
+    build:
+      context: ../../
+      dockerfile: ./docker/dockerfiles/prod/Dockerfile.front
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app/frontend
+    depends_on:
+      - app
+    networks:
+      - main_prod
+    command: npm run start
+
+
+  nginx:
+    # container_name: nginx-portal
+    build:
+      context: ../../
+      dockerfile: ./docker/dockerfiles/nginx/Dockerfile
+    ports:
+      - 8000:80
+    depends_on:
+      - web
+    volumes:
+      - static:/app/backend/static
+      - media:/app/backend/media
+      - ../nginx:/etc/nginx/conf.d/
+    restart: always
+
+
+  redis:
+    container_name: redis-nansy
+    build:
+      context: ../../
+      dockerfile: ./docker/dockerfiles/redis/Dockerfile
+    expose:
+      - 6379
+    ports:
+      - "6379:6379"
+    env_file:
+      - ./docker/env/production/.env
+    networks:
+      - main_prod
+
+
+  supevisor:
+    container_name: supervisor-nansy
+    restart: always
+    build:
+      context: ../../
+      dockerfile: ./docker/dockerfiles/prod/Dockerfile 
+    working_dir: /app/backend
+    command:
+      - /bin/bash
+      - '-c'
+      - |
+        sleep 20s
+        supervisord -c /etc/supervisor/supervisord.conf 
+        supervisorctl reread
+        supervisorctl update
+        supervisorctl start all
+        supervisorctl status
+        echo  "Container in sleep status"
+        sleep 5d
+    
+    volumes:
+      - ./logs/supervisor:/var/log/app/
+    env_file:
+      - ./docker/env/production/.env
+    depends_on:
+      - app
+      - redis
+    networks:
+      - main_prod
+
+networks:
+  main_prod:
+    driver: bridge

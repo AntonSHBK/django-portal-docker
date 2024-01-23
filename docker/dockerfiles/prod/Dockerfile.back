@@ -5,25 +5,23 @@
 # pull official base image
 FROM python:3.9.6-alpine as builder
 
-# set work directory
-WORKDIR /usr/src/app
-
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# install psycopg2 dependencies
+# install dependencies
 RUN apk update
 RUN apk add -y --no-cache\
     postgresql-dev\
     gcc\
     python3-dev\
-    musl-dev
+    musl-dev\
+    bash
 
-# install dependencies
+# install python dependencies
 RUN pip install --upgrade pip
-COPY pip_install_txt/common.txt /tmp/common.txt
-COPY pip_install_txt/production.txt /tmp/production.txt
+COPY ./pip_install_txt/common.txt /tmp/common.txt
+COPY ./pip_install_txt/production.txt /tmp/production.txt
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r /tmp/production.txt
 
 #########
@@ -37,6 +35,11 @@ FROM python:3.9.6-alpine
 ENV APP_HOME=/app/backend
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
+
+# add supervisor conf
+RUN mkdir -p /var/log/app/
+RUN mkdir -p /etc/supervisor
+COPY config/supervisord.conf /etc/supervisor/supervisord.conf
 
 # create the app user
 # ARG CUID=1000
