@@ -12,6 +12,7 @@
 - Celery
 - Celery-Beat
 - Constance
+- Coverage
 
 
 # Что нужно изучить

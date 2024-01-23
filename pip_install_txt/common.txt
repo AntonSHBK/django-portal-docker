@@ -21,7 +21,7 @@ django-cleanup==8.0.0
 
 # For image work
 # https://pillow.readthedocs.io/en/stable/index.html
-Pillow==10.0.1
+Pillow
 
 # For texteditor
 # https://django-ckeditor.readthedocs.io/en/latest/

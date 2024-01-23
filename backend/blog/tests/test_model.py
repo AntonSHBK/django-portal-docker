@@ -1,64 +1,54 @@
 from django.test import TestCase
+from django.contrib.auth.models import User
 
-# class YourTestClass(TestCase):
+from blog.models import Post
 
-#     @classmethod
-#     def setUpTestData(cls):
-#         print("setUpTestData: Run once to set up non-modified data for all class methods.")
-#         pass
+USER = User.objects.get(id=0)
+TITLE="Title"
+CONTENT="Context"
 
-#     def setUp(self):
-#         print("setUp: Run once for every test method to setup clean data.")
-#         pass
-
-#     def test_false_is_false(self):
-#         print("Method: test_false_is_false.")
-#         self.assertFalse(False)
-
-#     def test_false_is_true(self):
-#         print("Method: test_false_is_true.")
-#         self.assertTrue(True)
-
-#     def test_one_plus_one_equals_two(self):
-#         print("Method: test_one_plus_one_equals_two.")
-#         self.assertEqual(1 + 1, 2)
-
-
-from django.test import TestCase
-
-# Create your tests here.
-
-from catalog.models import Author
-
-class AuthorModelTest(TestCase):
-
+class PostModelTest(TestCase):
+    
+    # setUpTestData: Run once to set up non-modified data for all class methods
     @classmethod
     def setUpTestData(cls):
-        #Set up non-modified objects used by all test methods
-        Author.objects.create(first_name='Big', last_name='Bob')
+        cls.post: Post = Post.objects.create(author=USER, title=TITLE, content=CONTENT)
+        cls.post_id = cls.post.id
+           
+    # setUp: Run once for every test method to setup clean data.
+    def setUp(self):
+        pass
 
-    def test_first_name_label(self):
-        author=Author.objects.get(id=1)
-        field_label = author._meta.get_field('first_name').verbose_name
-        self.assertEquals(field_label,'first name')
+    def test_title_label(self):
+        post = Post.objects.get(id=self.post_id)
+        title = post._meta.get_field('title').verbose_name
+        self.assertEquals(title,'Title')
 
-    def test_date_of_death_label(self):
-        author=Author.objects.get(id=1)
-        field_label = author._meta.get_field('date_of_death').verbose_name
-        self.assertEquals(field_label,'died')
-
-    def test_first_name_max_length(self):
-        author=Author.objects.get(id=1)
-        max_length = author._meta.get_field('first_name').max_length
-        self.assertEquals(max_length,100)
-
-    def test_object_name_is_last_name_comma_first_name(self):
-        author=Author.objects.get(id=1)
-        expected_object_name = '%s, %s' % (author.last_name, author.first_name)
-        self.assertEquals(expected_object_name,str(author))
+    def test_title_max_length(self):
+        post = Post.objects.get(id=self.post_id)
+        max_length = post._meta.get_field('title').max_length
+        self.assertEquals(max_length, 100)
 
     def test_get_absolute_url(self):
-        author=Author.objects.get(id=1)
+        post = Post.objects.get(id=self.post_id)
         #This will also fail if the urlconf is not defined.
-        self.assertEquals(author.get_absolute_url(),'/catalog/author/1')
+        self.assertEquals(post.get_absolute_url(),
+                          'user/{username}/'.format(
+                              username=self.post.author.username))
+
+
+
+    # def test_false_is_false(self):
+    #     print("Method: test_false_is_false.")
+    #     self.assertFalse(False)
+
+    # def test_false_is_true(self):
+    #     print("Method: test_false_is_true.")
+    #     self.assertTrue(True)
+
+    # def test_one_plus_one_equals_two(self):
+    #     print("Method: test_one_plus_one_equals_two.")
+    #     self.assertEqual(1 + 1, 2)
+
+    
 
