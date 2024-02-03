@@ -73,7 +73,7 @@ services:
 
 
   supevisor:
-    restart: always
+    # restart: always
     build:
       context: .
       dockerfile: ./docker/dockerfiles/dev/Dockerfile.back
