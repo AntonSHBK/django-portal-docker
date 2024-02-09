@@ -1,5 +1,7 @@
 version: '3.8'
 
+name: django-portal
+
 services:
   app:
     container_name: app-dev
